@@ -4,54 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <script>
-        //по клику получаем координаты щелчка и записываем их в переменную
-        document.addEventListener("click",getCoordinates);
-        let coordX;
-        function getCoordinates(event){
-           coordX = event.clientX;
-           console.log(coordX);
-        }
-
-        //генерим каждые пол секунды сообщение в консоль в зависимости от текущего значения координат
-        //которое записано в переменной после щелчка
-        setInterval(function(){
-            /* Через свитч почему то не работает, выдает только дефолтные значения
-            
-            let diap1 = (coordX < 100);
-            let diap2 = (coordX < 200);
-            let diap3 = (coordX < 300);
-            let diap4 = (coordX < 500);
-            switch (coordX) {
-                case diap1:
-                    console.log("cow");
-                    break;
-                case diap2:
-                    console.log("cow 2");
-                    break;
-                case diap3:
-                    console.log("cow 3");
-                    break;
-                default:
-                    console.log("cow 4");
-                }
-             */
-             if (coordX < 100) {
-                console.log("cow");
-             } else if(coordX < 200) {
-                console.log("cow 2");
-             } else if(coordX < 300) {
-                console.log("cow 3");
-             } else if(coordX < 400) {
-                console.log("cow 4");
-             } else {
-                console.log("cow 5");
-             }
-            
-            
-            },500);
-    </script>
+    <title>Найди корову</title>
+    <script src="js/script.js" type="text/javascript"></script>
 </head>
 <body>
     
