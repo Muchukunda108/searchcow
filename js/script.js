@@ -1,6 +1,25 @@
-//задаем координаты коровы
-const cowX = 600;
-const cowY = 400;
+//задаем стартовые координаты коровы
+let cowX = 600;
+let cowY = 400; 
+
+//генерируем положение коровы
+function dislocationCow(){
+    //получить размеры окна
+    const windowWidth = document.documentElement.clientWidth;
+    const windowHeight = document.documentElement.clientHeight;
+    // console.log(windowHeight);
+    // console.log(windowWidth);
+    //в пределах размера окна сгенерировать точку
+    function myRandom(from,to){
+        return Math.floor((Math.random()*(to-from+1)) + from);
+    }
+
+    cowX = myRandom(0,windowWidth);
+    // console.log(cowX);
+    cowY = myRandom(0,windowHeight);
+    // console.log(cowY);
+}
+dislocationCow();
 
 //по клику получаем координаты щелчка и записываем их в переменную
 document.addEventListener("click",getCoordinates);
@@ -50,7 +69,7 @@ let inter = setInterval(function(){
         console.log("cow");
         audioMu.play();
         clearInterval(inter);
-     } else if(distance < 150) {
+     } else if(distance < 100) {
         console.log("cow 2");
         audioCow4.play();
      } else if(distance < 350) {
