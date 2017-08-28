@@ -7,9 +7,10 @@ window.onload = function () {
 
 
     //localStorage
+    let reloads;
     function reloadPage() {
 
-        let reloads;
+        
         if (localStorage.getItem("reloads") == undefined) {
             localStorage.setItem("reloads", 1);
             reloads = localStorage.getItem("reloads");
@@ -23,7 +24,6 @@ window.onload = function () {
 
     };
 
-    reloadPage();
 
 
     //генерируем положение коровы
@@ -99,8 +99,6 @@ window.onload = function () {
             console.log("cow");
             audioMu.play();
             clearInterval(inter);
-            createButton();
-            makeCowVisible();
         } else if (distance < 180) {
             console.log("cow 2");
             audioCow4.play();
@@ -114,10 +112,10 @@ window.onload = function () {
             console.log("cow 5");
             audioCow1.play();
         }
-
-
     }, 600);
-
+    //события клика к корове
+    cow.addEventListener("click", makeCowVisible);
+    cow.addEventListener("click", createButton);
     //корова
 
     function makeCowVisible() {
@@ -128,11 +126,20 @@ window.onload = function () {
     //кнопка
 
     function createButton() {
-        let finalButton = document.createElement("button");
-        finalButton.innerHTML = "Перезагрузить страницу";
-        document.firstElementChild.appendChild(finalButton);
-        console.log("кнопка создана");
-        finalButton.addEventListener("click", refresh);
+        reloadPage();
+        let finalDiv = document.createElement("div");
+        finalDiv.setAttribute("id", "finalDiv");
+        finalDiv.innerHTML = "<button id = 'refreshButton'>Перезагрузить страницу</button> <p>Коров вы нашли "+reloads+".</p>";
+        finalDiv.style.top = cow.style.top;
+        finalDiv.style.left = cow.style.left;
+        document.body.appendChild(finalDiv);
+        let refreshButton = document.getElementById("refreshButton");
+        refreshButton.addEventListener("click", refresh);
+        // let finalButton = document.createElement("button");
+        // finalButton.innerHTML = "Перезагрузить страницу";
+        // document.firstElementChild.appendChild(finalButton);
+        // console.log("кнопка создана");
+        // finalButton.addEventListener("click", refresh);
     };
 
     function refresh() {
