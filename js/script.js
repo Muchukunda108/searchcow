@@ -1,6 +1,28 @@
 //задаем стартовые координаты коровы
+
 let cowX = 600;
 let cowY = 400; 
+
+
+//localStorage
+function reloadPage() {
+        
+    let reloads;        
+    if(localStorage.getItem("reloads")==undefined) {
+        localStorage.setItem("reloads", 1);
+        reloads = localStorage.getItem("reloads");
+
+    } else {
+        reloads = localStorage.getItem("reloads");
+        reloads++;
+        localStorage.setItem("reloads", reloads);
+    }
+    console.log("reloads = " + reloads);
+    
+};
+
+reloadPage();
+
 
 //генерируем положение коровы
 function dislocationCow(){
@@ -12,13 +34,14 @@ function dislocationCow(){
     //в пределах размера окна сгенерировать точку
     function myRandom(from,to){
         return Math.floor((Math.random()*(to-from+1)) + from);
-    }
+    };
 
     cowX = myRandom(0,windowWidth);
-    // console.log(cowX);
+    console.log(cowX);
     cowY = myRandom(0,windowHeight);
-    // console.log(cowY);
-}
+    console.log(cowY);
+    
+};
 dislocationCow();
 
 //по клику получаем координаты щелчка и записываем их в переменную
@@ -38,7 +61,7 @@ function getCoordinates(event){
 
     distance = Math.ceil( Math.sqrt((x*x)+(y*y)));
     console.log(distance);
-}
+};
 
 let audioCow1 = new Audio();
 audioCow1.preload = 'auto';
@@ -65,23 +88,39 @@ audioMu.src = 'audio/mu.wav';
 //которое записано в переменной после щелчка
 let inter = setInterval(function(){
     
-     if (distance < 50) {
+     if (distance < 1050) {
         console.log("cow");
         audioMu.play();
         clearInterval(inter);
-     } else if(distance < 100) {
-        console.log("cow 2");
-        audioCow4.play();
-     } else if(distance < 350) {
-        console.log("cow 3");
-        audioCow3.play();
-     } else if(distance < 500) {
-        console.log("cow 4");
-        audioCow2.play();
-     } else {
-        console.log("cow 5");
-        audioCow1.play();
-     }
+        createButton();
+     }; 
+    //  else if(distance < 100) {
+    //     console.log("cow 2");
+    //     audioCow4.play();
+    //  } else if(distance < 350) {
+    //     console.log("cow 3");
+    //     audioCow3.play();
+    //  } else if(distance < 500) {
+    //     console.log("cow 4");
+    //     audioCow2.play();
+    //  } else {
+    //     console.log("cow 5");
+    //     audioCow1.play();
+    //  }
     
     
     },600);
+
+    //кнопка
+
+    function createButton() {
+        let finalButton = document.createElement("button");
+        finalButton.innerHTML = "Перезагрузить страницу";
+        document.firstElementChild.appendChild(finalButton);
+        console.log("кнопка создана");
+        finalButton.addEventListener("click", refresh);
+    };
+
+    function refresh() {
+        location.reload();
+    };
