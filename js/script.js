@@ -95,7 +95,11 @@ window.onload = function () {
     //которое записано в переменной после щелчка
     let inter = setInterval(function () {
 
-        if (distance < 115) {
+        if (distance < 60) {
+            // cow.addEventListener("click", makeCowVisible);
+            // cow.addEventListener("click", createButton);
+            createButton();
+            makeCowVisible();
             console.log("cow");
             audioMu.play();
             clearInterval(inter);
@@ -113,9 +117,7 @@ window.onload = function () {
             audioCow1.play();
         }
     }, 600);
-    //события клика к корове
-    cow.addEventListener("click", makeCowVisible);
-    cow.addEventListener("click", createButton);
+
     //корова
 
     function makeCowVisible() {
@@ -130,19 +132,16 @@ window.onload = function () {
         let finalDiv = document.createElement("div");
         finalDiv.setAttribute("id", "finalDiv");
         finalDiv.innerHTML = "<button id = 'refreshButton'>Перезагрузить страницу</button> <p>Коров вы нашли "+reloads+".</p>";
-        finalDiv.style.top = cow.style.top;
-        finalDiv.style.left = cow.style.left;
+        finalDiv.style.top = 35+"%";
+        finalDiv.style.left = 40+"%";
         document.body.appendChild(finalDiv);
         let refreshButton = document.getElementById("refreshButton");
         refreshButton.addEventListener("click", refresh);
-        // let finalButton = document.createElement("button");
-        // finalButton.innerHTML = "Перезагрузить страницу";
-        // document.firstElementChild.appendChild(finalButton);
-        // console.log("кнопка создана");
-        // finalButton.addEventListener("click", refresh);
+
     };
 
     function refresh() {
         location.reload();
     };
+
 }
