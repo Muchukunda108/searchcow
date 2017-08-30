@@ -5,12 +5,17 @@ window.onload = function () {
     let cowY = 400;
     let cow = document.getElementById("cow");
 
+    //сохраняем лучший счёт    
+    let score = 5020;
+    let bestScore = 0;
+    
+    if(localStorage.getItem("bestCowScore")!=undefined) {
+        bestScore = localStorage.getItem("bestCowScore");
+    }; 
 
     //localStorage
     let reloads;
     function reloadPage() {
-
-        
         if (localStorage.getItem("reloads") == undefined) {
             localStorage.setItem("reloads", 1);
             reloads = localStorage.getItem("reloads");
@@ -23,9 +28,10 @@ window.onload = function () {
         console.log("reloads = " + reloads);
 
     };
-
-
-
+    
+    // if (score > bestScore) {
+    //     bestScore = score;
+    // } ;
     //генерируем положение коровы
     function dislocationCow() {
         //получить размеры окна
@@ -95,14 +101,20 @@ window.onload = function () {
     //которое записано в переменной после щелчка
     let inter = setInterval(function () {
 
-        if (distance < 60) {
+        if (distance < 80) {
             // cow.addEventListener("click", makeCowVisible);
             // cow.addEventListener("click", createButton);
+            if (bestScore<score) {
+                bestScore = score;	
+                localStorage.setItem("bestCowScore", bestScore);
+            };
             createButton();
             makeCowVisible();
             console.log("cow");
             audioMu.play();
             clearInterval(inter);
+            clearInterval(scoreTimer);
+            console.log("Лучший счёт: "+bestScore);
         } else if (distance < 180) {
             console.log("cow 2");
             audioCow4.play();
@@ -121,8 +133,8 @@ window.onload = function () {
     //корова
 
     function makeCowVisible() {
-        // cow.style.visibility = "visible";
-        cow.style.opacity = 1;
+        cow.style.visibility = "visible";
+        // cow.style.opacity = 1;
     };
 
     //кнопка
@@ -131,7 +143,8 @@ window.onload = function () {
         reloadPage();
         let finalDiv = document.createElement("div");
         finalDiv.setAttribute("id", "finalDiv");
-        finalDiv.innerHTML = "<button id = 'refreshButton'>Перезагрузить страницу</button> <p>Коров вы нашли "+reloads+".</p>";
+        finalDiv.innerHTML = "<button id = 'refreshButton'>Перезагрузить страницу</button> <p>Коров вы нашли "+reloads+
+        ".<br> Ваш счёт: "+score+". <br> Ваш лучший счёт "+bestScore+".</p>";
         finalDiv.style.top = 35+"%";
         finalDiv.style.left = 40+"%";
         document.body.appendChild(finalDiv);
@@ -143,5 +156,11 @@ window.onload = function () {
     function refresh() {
         location.reload();
     };
+    //счётчик очков
 
+    let scoreTimer = setInterval( 
+        function() {
+            score--;
+        }, 50);
+ 
 }
