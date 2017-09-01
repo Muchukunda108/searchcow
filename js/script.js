@@ -78,22 +78,27 @@ window.onload = function () {
 
     let audioCow1 = new Audio();
     audioCow1.preload = 'auto';
+    audioCow1.volume = 0.2;
     audioCow1.src = 'audio/cow1.wav';
 
     let audioCow2 = new Audio();
     audioCow2.preload = 'auto';
+    audioCow2.volume = 0.2;
     audioCow2.src = 'audio/cow2.wav';
 
     let audioCow3 = new Audio();
     audioCow3.preload = 'auto';
+    audioCow3.volume = 0.2;
     audioCow3.src = 'audio/cow3.wav';
 
     let audioCow4 = new Audio();
     audioCow4.preload = 'auto';
+    audioCow4.volume = 0.2;
     audioCow4.src = 'audio/cow4.wav';
 
     let audioMu = new Audio();
     audioMu.preload = 'auto';
+    audioMu.volume = 0.2;
     audioMu.src = 'audio/mu.wav';
 
 
@@ -115,13 +120,13 @@ window.onload = function () {
             clearInterval(inter);
             clearInterval(scoreTimer);
             console.log("Лучший счёт: "+bestScore);
-        } else if (distance < 180) {
+        } else if (distance < 120) {
             console.log("cow 2");
             audioCow4.play();
-        } else if (distance < 350) {
+        } else if (distance < 200) {
             console.log("cow 3");
             audioCow3.play();
-        } else if (distance < 500) {
+        } else if (distance < 300) {
             console.log("cow 4");
             audioCow2.play();
         } else {
